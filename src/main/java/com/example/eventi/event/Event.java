@@ -1,7 +1,15 @@
 package com.example.eventi.event;
 
 
+import jakarta.persistence.*;
+
+@Entity
+@Table
 public class Event {
+
+    @Id
+    @SequenceGenerator(name = "event_sequence", sequenceName = "event_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_sequence")
 
     private String name;
     private String description;
