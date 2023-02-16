@@ -4,13 +4,14 @@ package com.example.eventi.event;
 import jakarta.persistence.*;
 
 @Entity
-@Table
+@Table(name = "event")
 public class Event {
 
     @Id
     @SequenceGenerator(name = "event_sequence", sequenceName = "event_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_sequence")
 
+    private Long event_id;
     private String name;
     private String description;
     private String location;
@@ -19,11 +20,12 @@ public class Event {
     private String created_by;
     private String created_at;
 
-    public Event() {
+
+    public Event () {
 
     }
-
-    public Event(String name, String description, String location, String attending, String image, String created_by, String created_at) {
+    public Event(Long id, String name, String description, String location, String attending, String image, String created_by, String created_at) {
+        this.event_id = event_id;
         this.name = name;
         this.description = description;
         this.location = location;
@@ -31,6 +33,14 @@ public class Event {
         this.image = image;
         this.created_by = created_by;
         this.created_at = created_at;
+    }
+
+    public Long getId() {
+        return event_id;
+    }
+
+    public void setId(Long event_id) {
+        this.event_id = event_id;
     }
 
     public String getName() {
@@ -88,5 +98,4 @@ public class Event {
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
-
 }
