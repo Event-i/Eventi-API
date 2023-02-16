@@ -3,28 +3,35 @@ package com.example.eventi.event;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Entity
 @Table(name = "event")
 public class Event {
 
     @Id
-    @SequenceGenerator(name = "event_sequence", sequenceName = "event_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_sequence")
+//    @SequenceGenerator(name = "event_sequence", sequenceName = "event_sequence", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long event_id;
     private String name;
     private String description;
     private String location;
-    private String attending;
+    private int attending;
     private String image;
     private String created_by;
-    private String created_at;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at", nullable = false, updatable = false, columnDefinition = "CURRENT_TIMESTAMP")
+    private Date created_at;
 
 
     public Event () {
 
     }
-    public Event(Long id, String name, String description, String location, String attending, String image, String created_by, String created_at) {
+    public Event(Long event_id, String name, String description, String location, int attending, String image, String created_by, Date created_at) {
         this.event_id = event_id;
         this.name = name;
         this.description = description;
@@ -67,11 +74,11 @@ public class Event {
         this.location = location;
     }
 
-    public String getAttending() {
+    public int getAttending() {
         return attending;
     }
 
-    public void setAttending(String attending) {
+    public void setAttending(int attending) {
         this.attending = attending;
     }
 
@@ -91,11 +98,11 @@ public class Event {
         this.created_by = created_by;
     }
 
-    public String getCreated_at() {
+    public Date  getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreated_at(Date  created_at) {
         this.created_at = created_at;
     }
 }
